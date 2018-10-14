@@ -2,8 +2,7 @@
 angular
 .module('app')
 .controller('loginCtrl',loginCtrl)
-.controller('homeCtrl',homeCtrl)
-.controller('usersTableCtrl', usersTableCtrl);
+.controller('homeCtrl',homeCtrl);
 
 
 
@@ -57,9 +56,12 @@ function homeCtrl($scope,$window){
     {
       id:1,
       userId : 1,
-      des:`Facebook on Friday revealed that nearly 3 crore accounts on its platform were hit by a data breach and it will personally warn the affected users. However, users can also find out if their account was impacted on Facebook's
-                   Help Center page. Is my Facebook account impacted by this security issue? 
-                    question appears on it with Yes or No answer.`,
+      des:`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+      Nullam lectus justo, vulputate eget mollis sed, tempor sed magna.
+       Nulla pulvinar eleifend sem. Aenean id metus id velit ullamcorper pulvinar.
+        Integer vulputate sem a nibh rutrum consequat. Vivamus porttitor turpis ac leo.
+         Integer malesuada. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante. 
+      Phasellus et lorem id felis nonummy placerat.`,
       comments:[
           {
             id :1,
@@ -77,16 +79,16 @@ function homeCtrl($scope,$window){
               }
             ]
           }
-
-
       ]
-
     },
     {
       id:2,
       userId : 2,
-      des:`Congress' Chhattisgarh working President Ramdayal Uike on Saturday joined the BJP in the presence of BJP chief Amit Shah and Chief Minister Raman Singh. Slamming the Congress for neglecting tribals in the state, Uike said, 
-        "There is a difference in what they say and what they do."`,
+      des:`Praesent in mauris eu tortor porttitor accumsan. Nunc tincidunt ante vitae massa.
+       Quisque porta. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
+       mollit anim id est laborum. Nullam faucibus mi quis velit. Duis bibendum, lectus ut viverra rhoncus, 
+       dolor nunc faucibus libero, eget facilisis enim ipsum id lacus.
+       Duis pulvinar.Fusce tellus odio, dapibus id fermentum quis, suscipit id erat.`,
       comments:[
           {
             id:1,
@@ -102,7 +104,6 @@ function homeCtrl($scope,$window){
             ]
           }
       ]
-
     }
   ];
 
@@ -131,7 +132,7 @@ function homeCtrl($scope,$window){
   }
 
 /*
-  *
+  *@param: array of likes on comment
   * @return : true when comment liked by user 
   *loggedIn
 **/
@@ -172,6 +173,7 @@ function homeCtrl($scope,$window){
       }
     }
 
+    // check if string is empty or not
     $scope.validation = function(value){
         if(value&&value.length){
           return 1;
@@ -184,96 +186,7 @@ function homeCtrl($scope,$window){
 
   }
 
-usersTableCtrl.$inject = ['$scope', '$timeout'];
-function usersTableCtrl($scope, $timeout) {
-  $scope.name = 'vinay';
-  $scope.users = [
-    {
-      avatar: '1.jpg',
-      status: 'active',
-      name: 'Yiorgos Avraamu',
-      new: true,
-      registered: 'Jan 1, 2015',
-      country: 'USA',
-      flag: 'us',
-      usage: '50',
-      period: 'Jun 11, 2015 - Jul 10, 2015',
-      payment: 'mastercard',
-      activity: '10 sec ago',
-      satisfaction: '48'
-    },
-    {
-      avatar: '2.jpg',
-      status: 'busy',
-      name: 'Avram Tarasios',
-      new: false,
-      registered: 'Jan 1, 2015',
-      country: 'Brazil',
-      flag: 'br',
-      usage: '10',
-      period: 'Jun 11, 2015 - Jul 10, 2015',
-      payment: 'visa',
-      activity: '5 minutes ago',
-      satisfaction: '61'
-    },
-    {
-      avatar: '3.jpg',
-      status: 'away',
-      name: 'Quintin Ed',
-      new: true,
-      registered: 'Jan 1, 2015',
-      country: 'India',
-      flag: 'in',
-      usage: '74',
-      period: 'Jun 11, 2015 - Jul 10, 2015',
-      payment: 'stripe',
-      activity: '1 hour ago',
-      satisfaction: '33'
-    },
-    {
-      avatar: '4.jpg',
-      status: 'offline',
-      name: 'Enéas Kwadwo',
-      new: true,
-      registered: 'Jan 1, 2015',
-      country: 'France',
-      flag: 'fr',
-      usage: '98',
-      period: 'Jun 11, 2015 - Jul 10, 2015',
-      payment: 'paypal',
-      activity: 'Last month',
-      satisfaction: '23'
-    },
-    {
-      avatar: '5.jpg',
-      status: 'active',
-      name: 'Agapetus Tadeáš',
-      new: true,
-      registered: 'Jan 1, 2015',
-      country: 'Spain',
-      flag: 'es',
-      usage: '22',
-      period: 'Jun 11, 2015 - Jul 10, 2015',
-      payment: 'google',
-      activity: 'Last week',
-      satisfaction: '78'
-    },
-    {
-      avatar: '6.jpg',
-      status: 'busy',
-      name: 'Friderik Dávid',
-      new: true,
-      registered: 'Jan 1, 2015',
-      country: 'Poland',
-      flag: 'pl',
-      usage: '43',
-      period: 'Jun 11, 2015 - Jul 10, 2015',
-      payment: 'amex',
-      activity: 'Yesterday',
-      satisfaction: '11'
-    }
-  ]
-}
+
 
 
 
