@@ -42,6 +42,13 @@ function loginCtrl($scope,$state,$window,$rootScope){
 
       }
   }
+
+  $scope.logout = function(){
+    $window.sessionStorage.setItem('UserId',"");
+    $state.go('appSimple.login');
+    //alert('Logout Successfully');
+
+  } 
 }
 
 
