@@ -16,13 +16,15 @@ angular
   'ui.router',
   'oc.lazyLoad',
   'ncy-angular-breadcrumb',
-  'angular-loading-bar'
+  'angular-loading-bar',
+  'ui.router.state.events'
+
 ])
 .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = false;
   cfpLoadingBarProvider.latencyThreshold = 1;
 }])
-.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
+.run(['$rootScope', '$state', '$stateParams','$window', function($rootScope, $state, $stateParams,$window) {
   $rootScope.$on('$stateChangeSuccess',function(){
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   });
