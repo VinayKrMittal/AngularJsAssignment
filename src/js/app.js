@@ -26,6 +26,19 @@ angular
   $rootScope.$on('$stateChangeSuccess',function(){
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   });
+   // redirect to login page when authentication required
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+              console.log('inside changerote');
+              var sessionKey = $window.sessionStorage.getItem('UserId');
+              if(toState.authenticate && (!sessionKey))
+              {
+                      $state.transitionTo("appSimple.login");
+                      event.preventDefault();
+              }
+
+      });
   $rootScope.$state = $state;
   return $rootScope.$stateParams = $stateParams;
 }]);
+
+

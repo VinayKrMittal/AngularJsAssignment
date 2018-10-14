@@ -18,7 +18,7 @@
             <div class="row">
             <div class="col-sm-12 col-lg-6 col-md-6">
               <div class="form-group">
-                <input type="text" class="form-control" id="ccnumber" placeholder="Emter Comment" ng-model="post.newcomment" ng-keyup="$event.keyCode ==13 ? onNewComment($index): null">
+                <input type="text" class="form-control" id="ccnumber" placeholder="Enter Comment" ng-model="post.newcomment" ng-keyup="$event.keyCode ==13 ? validation(post.newcomment)&&onNewComment($index): null">
               </div>
             </div>
             <div class="col-sm-12 col-lg-6 col-md-6">
@@ -27,26 +27,51 @@
             </div>
             </div>
           </div>
-          <div ng-repeat="comment in post.comments">
+          <div ng-repeat="comment in post.comments" id="replyacc{{comment.id}}{{post.id}}">
             <div class="row comment">
              <strong>{{allUsers[comment.userId -1]["username"] | uppercase}}</strong>
             <div class="col-sm-6 col-lg-6 col-md-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" style="border-radius: 22px;" id="ccnumber" placeholder="Emter Comment" ng-model="comment.des" ng-disabled = "!comment.isdisabled" ng-keyup="$event.keyCode ==13 ? comment.isdisabled = false: null">
+                  <input type="text" class="form-control" style="border-radius: 22px;" id="ccnumber" placeholder="Enter Comment" ng-model="comment.des" ng-disabled = "!comment.isdisabled" ng-keyup="$event.keyCode ==13 ? comment.isdisabled = false: null">
                 </div>
               </div>
             </div>
             <div class="row">
-              <button type="button" class="btn btn-link" ng-click="onLikedClick($index,$parent.$parent.$index,comment.likes)">
+              <button type="button" class="btn btn-link" ng-click="onLikedClick($index,$parent.$index,comment.likes)">
               <span ng-if="comment.likes.length ">({{comment.likes.length}})</span>
               {{!comment.likes.length ? "Like" : (comment.likes.length && isLikedbyLoggedUser(comment.likes)) ? "Liked" : "Likes"}}
               </button>
-              <button type="button" class="btn btn-link">Reply</button>
+<!--               <button type="button" class="btn btn-link">Reply</button>
+ -->           <button class="btn btn-link" data-toggle="collapse"
+                     data-target="#cmt{{comment.id}}{{post.id}}" aria-expanded= "false">
+                       Reply
+               </button>
               <span ng-if="comment.userId == loggedIn">
               <button type="button" class="btn btn-link" ng-click="comment.isdisabled = true">Edit</button>
               <button type="button" class="btn btn-link" ng-click="onCommentDelete($index,$parent.$parent.$index)">Delete</button>
               </span>
             </div>
+            <div id="cmt{{comment.id}}{{post.id}}" class="collapse replyDiv" aria-labelledby="headingOne" data-parent="#replyacc{{comment.id}}{{post.id}}" >
+                <div class="row">
+                      <div class="col-sm-6 col-lg-6 col-md-6">
+                        <div class="form-group">
+                           <input type="text" class="form-control"  placeholder="Enter Reply" ng-model="comment.newreply" ng-keyup="$event.keyCode ==13 ? validation(comment.newreply)&&onNewReply($index,$parent.$index): null">
+                        </div>
+                     </div>
+                </div>
+                <div>
+                  <div ng-repeat="reply in comment.reply">
+                        <div class="row comment">
+                         <strong>{{allUsers[reply.userId -1]["username"] | uppercase}}</strong>
+                        <div class="col-sm-6 col-lg-6 col-md-6">
+                            <div class="form-group">
+                              <input type="text" class="form-control" style="border-radius: 22px;" ng-model="reply.des" ng-disabled = "true">
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>   

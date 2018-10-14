@@ -41,22 +41,13 @@ angular
           files: ['node_modules/simple-line-icons/css/simple-line-icons.css']
         }]);
       }],
-      loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
-        // you can lazy load files for an existing module
-        return $ocLazyLoad.load([{
-          serie: true,
-          name: 'chart.js',
-          files: [
-            'node_modules/chart.js/dist/Chart.min.js',
-            'node_modules/angular-chart.js/dist/angular-chart.min.js'
-          ]
-        }]);
-      }],
+     
     }
   })
   .state('app.main', {
     url: '/dashboard',
     templateUrl: 'views/main.html',
+    authenticate : true,
     //page title goes here
     ncyBreadcrumb: {
       label: 'Home',
@@ -64,19 +55,6 @@ angular
     //page subtitle goes here
     params: { subtitle: 'Welcome to ROOT powerfull Bootstrap & AngularJS UI Kit' },
     resolve: {
-      loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
-        // you can lazy load files for an existing module
-        return $ocLazyLoad.load([
-          {
-            serie: true,
-            name: 'chart.js',
-            files: [
-              'node_modules/chart.js/dist/Chart.min.js',
-              'node_modules/angular-chart.js/dist/angular-chart.min.js'
-            ]
-          },
-        ]);
-      }],
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         // you can lazy load controllers
         return $ocLazyLoad.load({
@@ -109,19 +87,6 @@ angular
     url: '/login',
     templateUrl: 'views/pages/login.html',
     resolve: {
-      loadPlugin: ['$ocLazyLoad', function ($ocLazyLoad) {
-        // you can lazy load files for an existing module
-        return $ocLazyLoad.load([
-          {
-            serie: true,
-            name: 'chart.js',
-            files: [
-              'node_modules/chart.js/dist/Chart.min.js',
-              'node_modules/angular-chart.js/dist/angular-chart.min.js'
-            ]
-          },
-        ]);
-      }],
       loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
         // you can lazy load controllers
         return $ocLazyLoad.load({

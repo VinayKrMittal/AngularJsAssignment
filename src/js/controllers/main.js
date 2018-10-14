@@ -62,6 +62,7 @@ function homeCtrl($scope,$window){
                     question appears on it with Yes or No answer.`,
       comments:[
           {
+            id :1,
             userId :2,
             des :"Good",
             likes :[
@@ -88,6 +89,7 @@ function homeCtrl($scope,$window){
         "There is a difference in what they say and what they do."`,
       comments:[
           {
+            id:1,
             userId :1,
             des :"Good",
             likes :[
@@ -102,22 +104,30 @@ function homeCtrl($scope,$window){
       ]
 
     }
-  ]
+  ];
 
   $scope.onNewComment= function(postindex){
-    console.log('postindexis'+postindex);
     let tempObj = {};
      tempObj.userId =  $window.sessionStorage.getItem("UserId");
      tempObj.des = $scope.posts[postindex].newcomment;
+     tempObj.id = $scope.posts[postindex].comments.length+1;
      tempObj.likes = [];
-     reply = []; 
+     tempObj.reply = []; 
      $scope.posts[postindex].comments.push(tempObj);
      $scope.posts[postindex].newcomment = "";
     }
 
   $scope.onCommentDelete = function(commentIndex,postindex){
-    console.log("on device Delete"+commentIndex+' '+postindex);
     $scope.posts[postindex].comments.splice(commentIndex,1);
+  }
+
+  $scope.onNewReply = function(commentIndex,postindex){
+    console.log(`commentIndexis ${commentIndex} postindex is : ${postindex}`);
+    let tempObj = {};
+    tempObj["userId"] = $scope.loggedIn;
+    tempObj["des"] = $scope.posts[postindex].comments[commentIndex].newreply;
+    $scope.posts[postindex].comments[commentIndex].reply.push(tempObj);
+    $scope.posts[postindex].comments[commentIndex].newreply = "";
   }
 
 /*
@@ -126,7 +136,7 @@ function homeCtrl($scope,$window){
   *loggedIn
 **/
   $scope.isLikedbyLoggedUser = function(likes){
-    console.log('likes'+JSON.stringify(likes));
+    //console.log('likes'+JSON.stringify(likes));
     if(likes.length){
       return likes.some(function(obj){
             return obj.userId == $scope.loggedIn;
@@ -137,17 +147,42 @@ function homeCtrl($scope,$window){
       }
     }
 
+  function isAlreadyLiked(allLikes){
+      let likedIndex =  -1;
+       allLikes.forEach(function(obj,index,self) {
+        if(obj.userId == $scope.loggedIn){
+              likedIndex = index;
+              return;
+          }
+      });
+     return likedIndex;
+  }
+
 
     /**On Cliked on Like**/
     $scope.onLikedClick = function(commentIndex,postindex,likes){
-    //   let isAlreadyLiked = $scope.isLikedbyLoggedUser(likes);
-    //   if(isAlreadyLiked){
-    //     $scope.posts[postindex].comments[commentIndex].likes.splice
-    //   }
-    // }
+      let likedBy = isAlreadyLiked(likes);
+      console.log('likedIndex'+likedBy);
+      if(likedBy != -1){
+        $scope.posts[postindex].comments[commentIndex].likes.splice(likedBy,1);
+      }else{
+        let tempObj = {};
+        tempObj["userId"] = $scope.loggedIn;
+        $scope.posts[postindex].comments[commentIndex].likes.push(tempObj);
+      }
+    }
 
-}
-}
+    $scope.validation = function(value){
+        if(value&&value.length){
+          return 1;
+        }
+        else{
+          alert("Message can't be Empty !!");
+          return 0;
+        }
+    }
+
+  }
 
 usersTableCtrl.$inject = ['$scope', '$timeout'];
 function usersTableCtrl($scope, $timeout) {
