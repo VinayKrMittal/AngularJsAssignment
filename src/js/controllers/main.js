@@ -32,9 +32,8 @@ function loginCtrl($scope,$state,$window,$rootScope){
 
       });
       if(user.length){
-        alert("login Successfully");
+        alert("login Successfully");        
        $window.sessionStorage.setItem('UserId',user[0].id);
-
         $state.go('app.main');
 
       }else{
